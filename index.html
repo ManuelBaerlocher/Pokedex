@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body onload="loadPokedex()">
+
+
+
+
+    <div class="pokedex-container">
+
+        <div id="pokedexGeneralView">
+            <div class="pokedex-general-head">
+                <div class="pokedex-general-title">
+                    <h2>Pokedex</h2>
+                    <img src="./img/loupe-dark.png">
+                </div>
+                <div class="pokedex-general-search">
+                    <input placeholder="Search Pokemon">
+                </div>
+            </div>
+            <div id="pokedexGeneralList">
+                <div class="pokemonGeneral">
+                    <div class="pokedexGeneralName">
+                        <h3>${name}</h3>
+                    </div>
+                    <div class="listbottom">
+                        <div>
+                            <div>Klasse 1</div>
+                            <div>Klasse 2</div>
+                        </div>
+                    
+                        <div>
+                            <img class=" listimg" id="pokedexGeneralImg-${i}">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="pokedexSingleView">
+
+        <h1 id="pokemonName">Name</h1>
+        <img id="pokemonImg">
+
+        <div class="info-container"></div>
+    </div>
+
+
+
+    </div>
+</body>
+
+</html>
