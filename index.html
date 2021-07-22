@@ -23,14 +23,14 @@
 
     <div class="pokedex-container">
 
-        <div id="pokedexGeneralView">
+        <div class="" id="pokedexGeneralView">
             <div class="pokedex-general-head">
                 <div class="pokedex-general-title">
                     <h2>Pokedex</h2>
-                    <img src="./img/loupe-dark.png">
+                    <img src="./img/list-black.png">
                 </div>
                 <div class="pokedex-general-search">
-                    <input placeholder="Search Pokemon">
+                    <input onkeyup="searchPokemon()" id="searchInput" placeholder="Search Pokemon">
                 </div>
             </div>
             <div id="pokedexGeneralList">
@@ -43,24 +43,33 @@
                             <div>Klasse 1</div>
                             <div>Klasse 2</div>
                         </div>
-                    
+
                         <div>
                             <img class=" listimg" id="pokedexGeneralImg-${i}">
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
 
+        <div class="d-none" id="pokedexSingleView">
+            <div>
+                <img onclick="loadGeneralView()" src="img/left-arrow.png">
+                <img src="img/heart.png">
+            </div>
+            <div>
+                <h2 id="pokemonName">Name</h2>
+                <div id='pokemonSort'>
 
-    <div id="pokedexSingleView">
+                </div>
+            </div>
+            <div>
+                <img id="pokemonImg">
+            </div>
 
-        <h1 id="pokemonName">Name</h1>
-        <img id="pokemonImg">
+            <div class="info-container"></div>
+        </div>
 
-        <div class="info-container"></div>
-    </div>
 
 
 

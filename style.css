@@ -1,4 +1,4 @@
-html{
+html {
     scroll-behavior: smooth;
 }
 
@@ -22,7 +22,6 @@ body {
 
 #pokedexGeneralView {
     background-color: white;
-
     border-radius: 24px;
     padding: 32px;
     box-sizing: border-box;
@@ -34,7 +33,6 @@ body {
 .pokedex-general-head {
     display: flex;
     flex-direction: column;
-    
 }
 
 .pokedex-general-title {
@@ -44,7 +42,7 @@ body {
 }
 
 .pokedex-general-title img {
-    height: 24px;
+    height: 32px;
     object-fit: cover;
     cursor: pointer;
 }
@@ -67,6 +65,9 @@ body {
     background-color: #efefef;
     outline: 0;
     padding-left: 24px;
+    background: url(./img/loupe-dark.png) no-repeat;
+    background-size: 24px;
+    background-position:  96%;
 }
 
 .listimg {
@@ -80,7 +81,7 @@ body {
 #pokedexSingleView {
     background-color: #ff5f6e;
     color: white;
-    display: none;
+    display: flex;
     padding: 24px;
     flex-direction: column;
     border-radius: 24px;
@@ -99,11 +100,11 @@ body {
     margin-top: -40px;
 }
 
-#pokedexGeneralList{
+#pokedexGeneralList {
     display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: flex-start;
     overflow: auto;
     position: absolute;
     bottom: 24px;
@@ -112,19 +113,18 @@ body {
     top: 20%;
 }
 
-#pokedexGeneralList h3{
+#pokedexGeneralList h3 {
     margin-top: 4px;
     margin-bottom: 4px;
 }
 
 ::-webkit-scrollbar {
     width: 0px;
-    background: transparent; /* make scrollbar transparent */
+    background: transparent;
+    /* make scrollbar transparent */
 }
 
-
-
-.pokemonGeneral{
+.pokemonGeneral {
     width: 40%;
     border-style: none;
     margin: 4px;
@@ -135,27 +135,25 @@ body {
     padding-right: 6px;
     background-color: black;
     color: white;
+    height: 113px;
 }
 
-.listbottom{
+.listbottom {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     min-height: 72px;
-
-
 }
 
-.sort{
-    background-color: rgb(255,255,255, 0.2);
+.sort {
+    background-color: rgb(255, 255, 255, 0.2);
     padding: 4px;
     padding-left: 12px;
     padding-right: 12px;
     border-radius: 12px;
-
     margin: 4px;
 }
 
 .d-none {
-    display: none;
+    display: none!important;
 }
