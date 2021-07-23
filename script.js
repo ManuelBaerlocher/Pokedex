@@ -1,75 +1,81 @@
-let pokedex;
 let currentPokemon;
-let pokemons = [];
+let pokemons;
+let lengthGeneral = 26;
+let a = 0;
 
 
+async function loadPokedex() {
+    await loadInternJson();
+    loadGeneralPokemon();
+}
+
+async function loadInternJson() {
+    let url = "pokemons.json";
+    let response = await fetch(url);
+
+    pokemons = await response.json();
+}
 
 async function loadPokemon(name) {
     let url = `https://pokeapi.co/api/v2/pokemon/${name}`;
     let response = await fetch(url);
     currentPokemon = await response.json();
-
-    /*console.log(currentPokemon);*/
-
-}
-
-async function loadPokedex() {
-    let urlpokedex = 'https://pokeapi.co/api/v2/pokedex/2/';
-    let responsepokedex = await fetch(urlpokedex);
-
-    pokedex = await responsepokedex.json();
-    /*console.log(pokedex);*/
-
-    loadGeneralPokemon();
-}
-
-
-
-function renderPokemonInfo() {
-    document.getElementById('pokemonName').innerHTML = currentPokemon['name'];
-    document.getElementById('pokemonImg').src = currentPokemon['sprites']['other']['dream_world']['front_default']
-
 }
 
 async function loadGeneralPokemon() {
 
     document.getElementById('pokedexGeneralList').innerHTML = '';
 
-    let pokemonList = pokedex['pokemon_entries'];
-
-    for (let i = 0; i < pokemonList.length; i++) {
-        let pokemon = pokemonList[i]['pokemon_species'];
-        let name = pokemon['name'];
-
-        nameformat = name[0].toUpperCase() + name.slice(1).toLowerCase();
-
+    for (a; a < lengthGeneral; a++) {
+        let nameformat = pokemons[a];
+        let name = nameformat.toLowerCase();
 
         await loadPokemon(name);
-        await fillPokemons(i, nameformat);
-        renderHtml(i, nameformat);
-        renderHtmlgeneralClass(i);
-        checkClass(i);
-        loadImg(i, currentPokemon);
+        renderHtml(a, nameformat);
+        renderHtmlgeneralClass(a);
+        checkClass(a);
+        loadImg(a, currentPokemon);
     }
 }
 
-function fillPokemons(i, nameformat) {
-    pokemons.push([i]);
-    pokemons[i] = {
-        'name': '',
-        'img': '',
-        'sort': [],
+async function addGeneralPokemon() {
+
+    for (a; a < lengthGeneral; a++) {
+        let nameformat = pokemons[a];
+        let name = nameformat.toLowerCase();
+
+        await loadPokemon(name);
+        renderHtml(a, nameformat);
+        renderHtmlgeneralClass(a);
+        checkClass(a);
+        loadImg(a, currentPokemon);
     }
-    pokemons[i]['name'] = nameformat;
+}
+
+
+function scrollload() {
+    let container = document.getElementById('pokedexGeneralList')
+
+    let scrollHeight = container.scrollHeight
+    let offsetHeight = container.offsetHeight
+    let scrollTop = container.scrollTop
+
+    let scrollBottom = scrollHeight - (offsetHeight + scrollTop)
+
+    if (scrollBottom == 0) {
+        if (lengthGeneral <= 125) {
+            lengthGeneral += 26;
+        } else {
+            lengthGeneral = 151;
+        }
+        addGeneralPokemon();
+    }
 }
 
 function loadImg(i, currentPokemon) {
-    
+
     let pokemonimg = currentPokemon['sprites']['other']['dream_world']['front_default'];
     document.getElementById('pokedexGeneralImg-' + i).src = pokemonimg;
-
-    pokemons[i]['img'] = pokemonimg;
-
 }
 
 function renderHtml(i, nameformat) {
@@ -92,8 +98,6 @@ function renderHtmlgeneralClass(i) {
         let sort = types[j]['type']['name'];
 
         sortformat = sort[0].toUpperCase() + sort.slice(1).toLowerCase();
-
-        pokemons[i].sort.push(sortformat);
 
         if (document.getElementById(`generalClass${i}`).innerHTML == 0) {
             document.getElementById(`generalClass${i}`).innerHTML += `<div class="sort" id="sort${i}">${sortformat}</div>`
@@ -147,56 +151,9 @@ function getColorForClass(typclass) {
     }
 }
 
-function searchPokemon() {
-
-    let searchinput = document.getElementById('searchInput').value;
-    searchinput = searchinput.toLowerCase();
-
-    document.getElementById('pokedexGeneralList').innerHTML = '';
-
-    for (let i = 0; i < pokemons.length; i++) {
-        let name = pokemons[i]['name'];
-
-        if (name.toLowerCase().includes(searchinput)) {
-            nameformat = name[0].toUpperCase() + name.slice(1).toLowerCase();
-
-            renderHtml(i, nameformat);
-            renderHtmlSearchImg(i);
-            renderHtmlSearchSort(i);
-            checkClass(i);
-        }
-    }
-
-}
-
-function renderHtmlSearchImg(i) {
-    let pokemonimg = pokemons[i]['img'];
-
-    document.getElementById('pokedexGeneralImg-' + i).src = pokemonimg;
-}
-
-function renderHtmlSearchSort(i) {
-    let pokemonsort = pokemons[i]['sort']
-
-    for (let j = 0; j < pokemonsort.length; j++) {
-        let sort = pokemons[i]['sort'][j];
-
-
-        if (document.getElementById(`generalClass${i}`).innerHTML == 0) {
-            document.getElementById(`generalClass${i}`).innerHTML += `<div class="sort" id="sort${i}">${sort}</div>`
-        } else {
-            document.getElementById(`generalClass${i}`).innerHTML += `<div class="sort">${sort}</div>`
-        }
-    }
-
-}
 
 async function loadSingleView(i) {
-    let pokemonList = pokedex['pokemon_entries'];
-    let pokemon = pokemonList[i]['pokemon_species'];
-    let name = pokemon['name'];
-
-
+    let name = pokemons[i].toLowerCase();
 
     changeClasslist();
     await loadPokemon(name);
@@ -204,12 +161,13 @@ async function loadSingleView(i) {
     renderHtmlSingleClass();
     checkSingleClass();
     renderHtmlSingleImg();
-    
+
 
 }
 
 function changeClasslist() {
     document.getElementById('pokedexSingleView').classList.remove('d-none');
+    document.getElementById('infoSingleView').classList.remove('d-none');
     document.getElementById('pokedexGeneralView').classList.add('d-none');
 }
 
@@ -219,7 +177,7 @@ function renderHtmlSingleName(name) {
     document.getElementById('pokemonName').innerHTML = nameformat;
 }
 
-function renderHtmlSingleImg(){
+function renderHtmlSingleImg() {
     let pokemonimg = currentPokemon['sprites']['other']['dream_world']['front_default'];
     document.getElementById('pokemonImg').src = pokemonimg;
 
@@ -245,7 +203,7 @@ function renderHtmlSingleClass() {
 
 function checkSingleClass() {
     let typclass = document.getElementById('singleSort').innerHTML;
-    let backgroundColor = document.getElementById('pokedexSingleView');
+    let backgroundColor = document.getElementById('pokedexContainer');
 
     backgroundColor.style.backgroundColor = getColorForClass(typclass);
 }
@@ -253,7 +211,58 @@ function checkSingleClass() {
 
 function loadGeneralView() {
     document.getElementById('pokedexSingleView').classList.add('d-none');
+    document.getElementById('infoSingleView').classList.add('d-none');
+
     document.getElementById('pokedexGeneralView').classList.remove('d-none');
 }
 
+/*async function searchPokemon() {
 
+    let searchinput = document.getElementById('searchInput').value;
+    searchinput = searchinput.toLowerCase();
+
+    document.getElementById('pokedexGeneralList').innerHTML = '';
+
+
+    for (let i = 0; i < pokemons.length; i++) {
+        let name = pokemons[i];
+
+        if (name.toLowerCase().includes(searchinput)) {
+            nameformat = name[0].toUpperCase() + name.slice(1).toLowerCase();
+            nameklein = name.toLowerCase()
+            console.log(name)
+            await loadPokemon(nameklein);
+
+            await renderHtml(i, nameformat);
+            /*await loadImg(i, nameklein);
+            await renderHtmlSearchSort(i);
+            /*checkClass(i);
+        }
+    }
+
+
+
+
+}
+
+function renderHtmlSearchImg(i) {
+    let pokemonimg = pokemons[i]['img'];
+
+    document.getElementById('pokedexGeneralImg-' + i).src = pokemonimg;
+}
+
+function renderHtmlSearchSort(i) {
+    let pokemonsort = pokemons[i]['sort']
+
+    /*for (let j = 0; j < pokemonsort.length; j++) {
+        let sort = pokemons[i]['sort'][j];
+
+
+        if (document.getElementById(`generalClass${i}`).innerHTML == 0) {
+            document.getElementById(`generalClass${i}`).innerHTML += `<div class="sort" id="sort${i}">${sort}</div>`
+        } else {
+            document.getElementById(`generalClass${i}`).innerHTML += `<div class="sort">${sort}</div>`
+        }
+    }
+
+}*/

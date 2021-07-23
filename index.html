@@ -9,6 +9,8 @@
 
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <script src="pokemons.json"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -21,7 +23,7 @@
 
 
 
-    <div class="pokedex-container">
+    <div id="pokedexContainer" class="pokedex-container">
 
         <div class="" id="pokedexGeneralView">
             <div class="pokedex-general-head">
@@ -33,7 +35,7 @@
                     <input onkeyup="searchPokemon()" id="searchInput" placeholder="Search Pokemon">
                 </div>
             </div>
-            <div id="pokedexGeneralList">
+            <div onscroll="scrollload()" id="pokedexGeneralList">
                 <div class="pokemonGeneral">
                     <div class="pokedexGeneralName">
                         <h3>${name}</h3>
@@ -54,21 +56,101 @@
 
         <div class="d-none" id="pokedexSingleView">
             <div>
-                <img onclick="loadGeneralView()" src="img/left-arrow.png">
-                <img src="img/heart.png">
-            </div>
-            <div>
-                <h2 id="pokemonName">Name</h2>
-                <div id='pokemonSort'>
+                <div class="singelview-head">
+                    <img onclick="loadGeneralView()" src="img/left-arrow.png">
+                    <img src="img/heart.png">
+                </div>
+                <div>
+                    <h2 id="pokemonName">Name</h2>
+                    <div id='pokemonSort'>
 
+                    </div>
+                </div>
+                <div class="singleimg">
+                    <img id="pokemonImg">
                 </div>
             </div>
-            <div>
-                <img id="pokemonImg">
-            </div>
 
-            <div class="info-container"></div>
+
         </div>
+        <div id="infoSingleView" class="info-container">
+            <div class="info-head">
+                <p>About</p>
+                <p>Base Stats</p>
+                <p>Evolution</p>
+                <p>Moves</p>
+            </div>
+            <div class="info-about d-none">
+                <div>
+                    <table>
+                        <tr>
+                            <td>
+                                Species
+                            </td>
+                            <td>
+                                Seed
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Height
+                            </td>
+                            <td>
+                                70 cm
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Weight
+                            </td>
+                            <td>
+                                6.9kg
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Abtilties
+                            </td>
+                            <td>
+                                Overgrow, Clorophzl
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <div>
+                        Breeding
+                    </div>
+                    <table>
+                        <tr>
+                            <td>
+                                Gender
+                            </td>
+                            <td>
+                                87.5% 12.5%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Egg Group
+                            </td>
+                            <td>
+                                Monster
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Egg Cycle
+                            </td>
+                            <td>
+                                Grass
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
 
 
 
