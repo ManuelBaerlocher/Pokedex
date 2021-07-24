@@ -23,7 +23,7 @@
 
 
 
-    <div id="pokedexContainer" class="pokedex-container">
+    <div id="pokedexContainer" class="pokedex-container" style="height: 80%;">
 
         <div class="" id="pokedexGeneralView">
             <div class="pokedex-general-head">
@@ -62,12 +62,11 @@
                 </div>
                 <div>
                     <h2 id="pokemonName">Name</h2>
-                    <div id='pokemonSort'>
-
-                    </div>
+                    <div id='pokemonSort'></div>
                 </div>
                 <div class="singleimg">
-                    <img id="pokemonImg">
+                    <img id="pokemonImg"
+                        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg">
                 </div>
             </div>
 
@@ -75,78 +74,158 @@
         </div>
         <div id="infoSingleView" class="info-container">
             <div class="info-head">
-                <p>About</p>
-                <p>Base Stats</p>
-                <p>Evolution</p>
-                <p>Moves</p>
+                <p class="info-head-select" id="infoHeadAbout" onclick="showAbout()">About</p>
+                <p id="infoHeadBaseStats" onclick="showBaseStats()">Base Stats</p>
+                <p id="infoHeadEvolution" onclick="showEvolution()">Evolution</p>
+
+
             </div>
-            <div class="info-about d-none">
-                <div>
+            <div id="infoAbout" class="info-about info-head-select">
+                
                     <table>
-                        <tr>
-                            <td>
-                                Species
-                            </td>
-                            <td>
-                                Seed
-                            </td>
-                        </tr>
                         <tr>
                             <td>
                                 Height
                             </td>
-                            <td>
+                            <td id="aboutHeight">
                                 70 cm
                             </td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>
                                 Weight
                             </td>
-                            <td>
+                            <td  id="aboutWeight">
                                 6.9kg
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Abtilties
+                                Abilities
                             </td>
-                            <td>
+                            <td  id="aboutAbilities">
                                 Overgrow, Clorophzl
                             </td>
                         </tr>
                     </table>
-                </div>
-                <div>
-                    <div>
-                        Breeding
-                    </div>
+                
+            </div>
+
+            <div id="infoBaseStats" class="info-basestats d-none">
+                <div class="basestats-stats">
                     <table>
                         <tr>
                             <td>
-                                Gender
+                                HP
+                            </td>
+                            <td id="baseStats0">
+                                45
                             </td>
                             <td>
-                                87.5% 12.5%
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Egg Group
-                            </td>
-                            <td>
-                                Monster
+                                <div id="baseStatsPb0"  class="progressbar"></div>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Egg Cycle
+                                Attack
+                            </td>
+                            <td id="baseStats1">
+                                60
                             </td>
                             <td>
-                                Grass
+                                <div id="baseStatsPb1"  class="progressbar"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Defense
+                            </td>
+                            <td id="baseStats2">
+                                48
+                            </td>
+                            <td>
+                                <div id="baseStatsPb2"  class="progressbar"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Sp. Atk
+                            </td>
+                            <td id="baseStats3">
+                                65
+                            </td>
+                            <td>
+                                <div id="baseStatsPb3"  class="progressbar"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Sp. Def
+                            </td>
+                            <td id="baseStats4">
+                                65
+                            </td>
+                            <td>
+                                <div id="baseStatsPb4"  class="progressbar"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Speed
+                            </td>
+                            <td id="baseStats5">
+                                45
+                            </td>
+                            <td>
+                                <div id="baseStatsPb5"  class="progressbar"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Total
+                            </td>
+                            <td id="baseStatsTotal">
+                                65
+                            </td>
+                            <td>
+                                <div id="baseStatsPbTotal" class="progressbar"></div>
                             </td>
                         </tr>
                     </table>
+                </div>
+                
+            </div>
+
+            <div id="infoEvolution" class="info-evolution d-none">
+                <div>
+                    <p>Evolution Chain</p>
+                </div>
+                <div>
+                    <div>
+                        <div>
+                            img
+                        </div>
+                        <div>
+                            Arrow Right
+                            <p>LVL16</p>
+                        </div>
+                        <div>
+                            img
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            img
+                        </div>
+                        <div>
+                            Arrow Right
+                            <p>LVL16</p>
+                        </div>
+                        <div>
+                            img
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -13,7 +13,7 @@ body {
 }
 
 .pokedex-container {
-    height: 80%;
+    
     width: 450px;
     border-radius: 24px;
     display: flex;
@@ -68,7 +68,7 @@ body {
     padding-left: 24px;
     background: url(./img/loupe-dark.png) no-repeat;
     background-size: 24px;
-    background-position:  96%;
+    background-position: 96%;
 }
 
 .listimg {
@@ -80,34 +80,17 @@ body {
 }
 
 #pokedexSingleView {
-    
     border-radius: 24px;
     padding: 32px;
-    box-sizing: border-box;
-    
-    width: 100%;
-    height: 100%;
     color: white;
-    box-sizing: border-box;
-    
 }
 
-#pokemonImg {
-    height: 300px;
-    width: 300px;
-}
 
 .info-container {
     border-radius: 24px;
     padding: 32px;
-    box-sizing: border-box;
-    
-    width: 100%;
-    height: 40%;
+    margin-top: -52px;
     background-color: white;
-    box-sizing: border-box;
-    
-    
 }
 
 #pokedexGeneralList {
@@ -164,38 +147,101 @@ body {
     margin: 4px;
 }
 
-.singelview-head{
+.singelview-head {
     display: flex;
     justify-content: space-between;
 }
 
-.singelview-head img{
+.singelview-head img {
     height: 40px;
     cursor: pointer;
 }
 
-#pokemonSort{
+#pokemonSort {
     display: flex;
 }
 
-.singleimg{
+.singleimg {
     display: flex;
     justify-content: center;
     margin-top: 36px;
+    position: relative;
+    
 }
 
-.singleimg img{
+.singleimg img {
     max-height: 250px;
     max-width: 250px;
-    position: absolute;
+
 }
 
-.info-head{
+.info-head {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     border-bottom-style: solid;
     border-width: 1px;
-    border-color: #efefef;
+    border-color: #acacac;
+}
+
+.info-head p {
+    cursor: pointer;
+    margin-bottom: 0px;
+    padding-bottom: 8px;
+    border-bottom: solid;
+    border-color: transparent;
+    color: #acacac;
+    font-weight: bold;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.info-head p:hover {
+    border-color: #7fdd6d;
+    color: rgb(0, 0, 0, 0.7);
+}
+
+.info-head-select{ 
+    border-color: #7fdd6d!important;
+    color: rgb(0, 0, 0, 0.7)!important; 
+}
+
+.info-about{
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.info-about td:first-child {
+    width: 25%;
+    color: #acacac;
+}
+
+.basestats-stats{
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+table {
+    width: 100%;
+}
+
+.basestats-stats td:first-child {
+    width: 25%;
+    color: #acacac;
+}
+
+.basestats-stats td{
+    width: 10%;
+}
+
+.basestats-stats td:last-child {
+    width: 70%;
+}
+
+.progressbar {
+    max-width:  100%;
+    height: 4px;
+    background-color: green;
+    border-radius: 4px;
 }
 
 .d-none {
