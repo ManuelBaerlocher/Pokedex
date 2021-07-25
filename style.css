@@ -196,12 +196,11 @@ body {
 }
 
 .info-head p:hover {
-    border-color: #7fdd6d;
+    
     color: rgb(0, 0, 0, 0.7);
 }
 
 .info-head-select{ 
-    border-color: #7fdd6d!important;
     color: rgb(0, 0, 0, 0.7)!important; 
 }
 

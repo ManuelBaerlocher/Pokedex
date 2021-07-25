@@ -2,8 +2,10 @@ let currentPokemon;
 let pokemons;
 let lengthGeneral = 26;
 let a = 0;
+let typclassSingle;
 
-function FirstStringBig(input){
+
+function FirstStringBig(input) {
     return input[0].toUpperCase() + input.slice(1).toLowerCase();
 }
 
@@ -158,6 +160,7 @@ function getColorForClass(typclass) {
 async function loadSingleView(i) {
     let name = pokemons[i].toLowerCase();
 
+
     changeClasslist();
     await loadPokemon(name);
     renderHtmlSingleName(name);
@@ -166,6 +169,12 @@ async function loadSingleView(i) {
     renderHtmlSingleImg();
     loadAboutPokemon();
     loadBaseStats();
+    showAbout();
+
+    typclass = document.getElementById(`singleSort`).innerHTML;
+    document.getElementById('infoHeadAbout').style = `border-color: ${getColorForClass(typclassSingle)}`;
+
+    changeColorSingleViewhaeder();
 
 
 }
@@ -207,12 +216,12 @@ function renderHtmlSingleClass() {
 }
 
 function checkSingleClass() {
-    let typclass = document.getElementById('singleSort').innerHTML;
+    typclassSingle = document.getElementById('singleSort').innerHTML;
     let backgroundColor = document.getElementById('pokedexContainer');
 
-    backgroundColor.style.backgroundColor = getColorForClass(typclass);
+    backgroundColor.style.backgroundColor = getColorForClass(typclassSingle);
     backgroundColor.style.height = '';
-    
+
 }
 
 
@@ -226,108 +235,134 @@ function loadGeneralView() {
     document.getElementById('pokedexGeneralView').classList.remove('d-none');
 }
 
-function showAbout(){
+function showAbout() {
+    let infoHeadAbout = document.getElementById('infoHeadAbout');
+    let infoHeadBaseStats = document.getElementById('infoHeadBaseStats');
+    let infoHeadEvolution = document.getElementById('infoHeadEvolution');
+
+
     document.getElementById('infoAbout').classList.remove('d-none');
-    document.getElementById('infoHeadAbout').classList.add('info-head-select');
+    infoHeadAbout.classList.add('info-head-select');
     document.getElementById('infoBaseStats').classList.add('d-none');
-    document.getElementById('infoHeadBaseStats').classList.remove('info-head-select');
+    infoHeadBaseStats.classList.remove('info-head-select');
     document.getElementById('infoEvolution').classList.add('d-none');
-    document.getElementById('infoHeadEvolution').classList.remove('info-head-select');
+    infoHeadEvolution.classList.remove('info-head-select');
+
+    infoHeadAbout.style = `border-color: ${getColorForClass(typclassSingle)}!important`;
+    infoHeadBaseStats.style = '';
+    infoHeadEvolution.style = '';
 }
 
-function showBaseStats(){
+function showBaseStats() {
+    let infoHeadAbout = document.getElementById('infoHeadAbout');
+    let infoHeadBaseStats = document.getElementById('infoHeadBaseStats');
+    let infoHeadEvolution = document.getElementById('infoHeadEvolution');
+
+
     document.getElementById('infoAbout').classList.add('d-none');
-    document.getElementById('infoHeadAbout').classList.remove('info-head-select');
+    infoHeadAbout.classList.remove('info-head-select');
     document.getElementById('infoBaseStats').classList.remove('d-none');
-    document.getElementById('infoHeadBaseStats').classList.add('info-head-select');
+    infoHeadBaseStats.classList.add('info-head-select');
     document.getElementById('infoEvolution').classList.add('d-none');
-    document.getElementById('infoHeadEvolution').classList.remove('info-head-select');
+    infoHeadEvolution.classList.remove('info-head-select');
+
+    infoHeadAbout.style = '';
+    infoHeadBaseStats.style = `border-color: ${getColorForClass(typclassSingle)}!important`;
+    infoHeadEvolution.style = '';
 }
 
-function showEvolution(){
+function showEvolution() {
+    let infoHeadAbout = document.getElementById('infoHeadAbout');
+    let infoHeadBaseStats = document.getElementById('infoHeadBaseStats');
+    let infoHeadEvolution = document.getElementById('infoHeadEvolution');
+
     document.getElementById('infoAbout').classList.add('d-none');
-    document.getElementById('infoHeadAbout').classList.remove('info-head-select');
+    infoHeadAbout.classList.remove('info-head-select');
     document.getElementById('infoBaseStats').classList.add('d-none');
-    document.getElementById('infoHeadBaseStats').classList.remove('info-head-select');
+    infoHeadBaseStats.classList.remove('info-head-select');
     document.getElementById('infoEvolution').classList.remove('d-none');
-    document.getElementById('infoHeadEvolution').classList.add('info-head-select');
+    infoHeadEvolution.classList.add('info-head-select');
+
+    infoHeadAbout.style = '';
+    infoHeadBaseStats.style = '';
+    infoHeadEvolution.style = `border-color: ${getColorForClass(typclassSingle)}!important`;
 }
 
-function loadAboutPokemon(){
+function loadAboutPokemon() {
     loadAboutHeight();
     loadAboutWeight();
     loadAboutAbilities();
 }
 
-function loadAboutHeight(){
+function loadAboutHeight() {
     let height = currentPokemon['height'];
     let heightcm = height * 10 + ' cm';
-    
+
     document.getElementById('aboutHeight').innerHTML = heightcm;
 }
 
-function loadAboutWeight(){
+function loadAboutWeight() {
     let weight = currentPokemon['weight'];
     let weightkg = weight / 10 + ' kg';
-    
+
     document.getElementById('aboutWeight').innerHTML = weightkg;
 }
 
-function loadAboutAbilities(){
+function loadAboutAbilities() {
     let abilities = currentPokemon['abilities'];
-    let container = document.getElementById('aboutAbilities'); 
-    
+    let container = document.getElementById('aboutAbilities');
+
     container.innerHTML = '';
 
     for (let i = 0; i < abilities.length; i++) {
         let abilitie = abilities[i]["ability"]["name"];
 
-        if(container.innerHTML == 0){
+        if (container.innerHTML == 0) {
             container.innerHTML = FirstStringBig(abilitie);
-        }else{
-            container.innerHTML +=', '+ FirstStringBig(abilitie);
+        } else {
+            container.innerHTML += ', ' + FirstStringBig(abilitie);
         }
     }
 }
 
-function loadBaseStats(){
+function loadBaseStats() {
     let stats = currentPokemon['stats']
     let sum = 0
-    
+
 
     for (let i = 0; i < stats.length; i++) {
         let stat = stats[i]["base_stat"];
-        sum =sum + stat;
+        sum = sum + stat;
 
         document.getElementById(`baseStats${i}`).innerHTML = stat;
         changeProgressBar(i, stat);
-        }
-        renderBaseStatsTotal(sum);
+    }
+    renderBaseStatsTotal(sum);
 }
 
-function changeProgressBar(i, stat){
+function changeProgressBar(i, stat) {
     document.getElementById(`baseStatsPb${i}`).style.width = stat + '%';
     document.getElementById(`baseStatsPb${i}`).style.backgroundColor = colorProgressBar(stat);
 }
 
-function colorProgressBar(stat){
-    if(stat <= 33){
+function colorProgressBar(stat) {
+    if (stat <= 33) {
         return 'red';
-    }else if(stat <= 66){
+    } else if (stat <= 66) {
         return 'orange';
-    }else if (stat <= 99){
+    } else if (stat <= 99) {
         return 'green';
-    }else{
+    } else {
         return 'gold';
     }
 }
 
-function renderBaseStatsTotal(sum){
+function renderBaseStatsTotal(sum) {
     document.getElementById('baseStatsTotal').innerHTML = sum;
     changeProgressBarTotal(sum);
 }
 
-function changeProgressBarTotal(sum){
+function changeProgressBarTotal(sum) {
     let baseStatsPbTotal = document.getElementById(`baseStatsPbTotal`);
     let precent = 100 / 600 * sum;
 
@@ -335,78 +370,65 @@ function changeProgressBarTotal(sum){
     baseStatsPbTotal.style.backgroundColor = colorProgressBarTotal(sum);
 }
 
-function colorProgressBarTotal(sum){
-    if(sum <= 200){
+function colorProgressBarTotal(sum) {
+    if (sum <= 200) {
         return 'red';
-    }else if(sum <= 400){
+    } else if (sum <= 400) {
         return 'orange';
-    }else if (sum <= 599){
+    } else if (sum <= 599) {
         return 'green';
-    }else{
+    } else {
         return 'gold';
     }
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-/*async function searchPokemon() {
+async function searchPokemon() {
 
     let searchinput = document.getElementById('searchInput').value;
     searchinput = searchinput.toLowerCase();
 
     document.getElementById('pokedexGeneralList').innerHTML = '';
 
+    if (searchinput == '') {
+        lengthGeneral = 26;
+        a = 0;
 
-    for (let i = 0; i < pokemons.length; i++) {
-        let name = pokemons[i];
+        await loadGeneralPokemon();
+    } else {
 
-        if (name.toLowerCase().includes(searchinput)) {
-            nameformat = name[0].toUpperCase() + name.slice(1).toLowerCase();
-            nameklein = name.toLowerCase()
-            console.log(name)
-            await loadPokemon(nameklein);
+        lengthGeneral = 151;
+        a = 151;
 
-            await renderHtml(i, nameformat);
-            /*await loadImg(i, nameklein);
-            await renderHtmlSearchSort(i);
-            /*checkClass(i);
+        for (let i = 0; i < pokemons.length; i++) {
+            let name = pokemons[i];
+
+            if (name.toLowerCase().includes(searchinput)) {
+
+                nameshort = name.toLowerCase()
+
+                await loadPokemon(nameshort);
+                await renderHtml(i, FirstStringBig(name));
+                loadImg(i, currentPokemon)
+                renderHtmlgeneralClass(i);
+                checkClass(i);
+            }
+
         }
     }
 
-
-
-
 }
 
-function renderHtmlSearchImg(i) {
-    let pokemonimg = pokemons[i]['img'];
+function changeColorSingleViewhaeder() {
+    let css = `.info-head p:hover{     border-color: ${getColorForClass(typclassSingle)}; }`;
+    let style = document.createElement('style');
 
-    document.getElementById('pokedexGeneralImg-' + i).src = pokemonimg;
-}
-
-function renderHtmlSearchSort(i) {
-    let pokemonsort = pokemons[i]['sort']
-
-    /*for (let j = 0; j < pokemonsort.length; j++) {
-        let sort = pokemons[i]['sort'][j];
-
-
-        if (document.getElementById(`generalClass${i}`).innerHTML == 0) {
-            document.getElementById(`generalClass${i}`).innerHTML += `<div class="sort" id="sort${i}">${sort}</div>`
-        } else {
-            document.getElementById(`generalClass${i}`).innerHTML += `<div class="sort">${sort}</div>`
-        }
+    if (style.styleSheet) {
+        style.styleSheet.cssText = css;
+    } else {
+        style.appendChild(document.createTextNode(css));
     }
 
-}*/
+    document.getElementById('infoHeadBaseStats').appendChild(style);
+}
 
