@@ -4,16 +4,19 @@ let lengthGeneral = 26;
 let a = 0;
 let typclassSingle;
 
-
+//First String Size Big//
 function FirstStringBig(input) {
     return input[0].toUpperCase() + input.slice(1).toLowerCase();
 }
 
+//Load intern Json and Home Page//
 async function loadPokedex() {
     await loadInternJson();
     loadGeneralPokemon();
 }
 
+
+//Load intern Json//
 async function loadInternJson() {
     let url = "pokemons.json";
     let response = await fetch(url);
@@ -21,12 +24,14 @@ async function loadInternJson() {
     pokemons = await response.json();
 }
 
+//Load Current Pokemon//
 async function loadPokemon(name) {
     let url = `https://pokeapi.co/api/v2/pokemon/${name}`;
     let response = await fetch(url);
     currentPokemon = await response.json();
 }
 
+//Load Home Page//
 async function loadGeneralPokemon() {
 
     document.getElementById('pokedexGeneralList').innerHTML = '';
@@ -43,6 +48,7 @@ async function loadGeneralPokemon() {
     }
 }
 
+//add General Pokemon if scroll//
 async function addGeneralPokemon() {
 
     for (a; a < lengthGeneral; a++) {
@@ -57,7 +63,7 @@ async function addGeneralPokemon() {
     }
 }
 
-
+// scroll Function on General Side//
 function scrollload() {
     let container = document.getElementById('pokedexGeneralList')
 
@@ -77,12 +83,16 @@ function scrollload() {
     }
 }
 
+
+// load Img for Pokemon//
 function loadImg(i, currentPokemon) {
 
     let pokemonimg = currentPokemon['sprites']['other']['dream_world']['front_default'];
     document.getElementById('pokedexGeneralImg-' + i).src = pokemonimg;
 }
 
+
+// fill Html Home Page//
 function renderHtml(i, nameformat) {
     document.getElementById('pokedexGeneralList').innerHTML += `
     <div onclick="loadSingleView(${i})" id="pokemonGeneral${i}" class="pokemonGeneral">
@@ -96,6 +106,8 @@ function renderHtml(i, nameformat) {
     </div>`;
 }
 
+
+//fill Class to the Pokemon//
 function renderHtmlgeneralClass(i) {
     types = currentPokemon['types']
 
@@ -112,6 +124,8 @@ function renderHtmlgeneralClass(i) {
     }
 }
 
+
+//Control the Class//
 function checkClass(i) {
     let typclass = document.getElementById(`sort${i}`).innerHTML;
     let backgroundColor = document.getElementById(`pokemonGeneral${i}`);
@@ -119,8 +133,7 @@ function checkClass(i) {
     backgroundColor.style.backgroundColor = getColorForClass(typclass);
 }
 
-
-
+//define Color for Class//
 function getColorForClass(typclass) {
     switch (typclass) {
         case 'Grass':
@@ -156,10 +169,9 @@ function getColorForClass(typclass) {
     }
 }
 
-
+//Load Single View//
 async function loadSingleView(i) {
     let name = pokemons[i].toLowerCase();
-
 
     changeClasslist();
     await loadPokemon(name);
@@ -179,24 +191,29 @@ async function loadSingleView(i) {
 
 }
 
+//Change Side for Singleview//
 function changeClasslist() {
     document.getElementById('pokedexSingleView').classList.remove('d-none');
     document.getElementById('infoSingleView').classList.remove('d-none');
     document.getElementById('pokedexGeneralView').classList.add('d-none');
 }
 
+//Load Html Singleview//
 function renderHtmlSingleName(name) {
     let nameformat = name[0].toUpperCase() + name.slice(1).toLowerCase();
 
     document.getElementById('pokemonName').innerHTML = nameformat;
 }
 
+//Load Singleimg Pokemon//
 function renderHtmlSingleImg() {
     let pokemonimg = currentPokemon['sprites']['other']['dream_world']['front_default'];
     document.getElementById('pokemonImg').src = pokemonimg;
 
 }
 
+
+//Load SingleClass//
 function renderHtmlSingleClass() {
     types = currentPokemon['types'];
 
@@ -215,6 +232,8 @@ function renderHtmlSingleClass() {
     }
 }
 
+
+//Change Color for Singleclass//
 function checkSingleClass() {
     typclassSingle = document.getElementById('singleSort').innerHTML;
     let backgroundColor = document.getElementById('pokedexContainer');
@@ -224,7 +243,7 @@ function checkSingleClass() {
 
 }
 
-
+//Load General View//
 function loadGeneralView() {
     let backgroundColor = document.getElementById('pokedexContainer');
 
@@ -235,72 +254,76 @@ function loadGeneralView() {
     document.getElementById('pokedexGeneralView').classList.remove('d-none');
 }
 
+//Show NavBar About//
 function showAbout() {
     let infoHeadAbout = document.getElementById('infoHeadAbout');
     let infoHeadBaseStats = document.getElementById('infoHeadBaseStats');
-    let infoHeadEvolution = document.getElementById('infoHeadEvolution');
+    /*let infoHeadEvolution = document.getElementById('infoHeadEvolution');*/
 
 
     document.getElementById('infoAbout').classList.remove('d-none');
     infoHeadAbout.classList.add('info-head-select');
     document.getElementById('infoBaseStats').classList.add('d-none');
     infoHeadBaseStats.classList.remove('info-head-select');
-    document.getElementById('infoEvolution').classList.add('d-none');
-    infoHeadEvolution.classList.remove('info-head-select');
+    /*document.getElementById('infoEvolution').classList.add('d-none');
+    infoHeadEvolution.classList.remove('info-head-select');*/
 
     infoHeadAbout.style = `border-color: ${getColorForClass(typclassSingle)}!important`;
     infoHeadBaseStats.style = '';
-    infoHeadEvolution.style = '';
+    /*infoHeadEvolution.style = '';*/
 }
 
+//Show BaseStats//
 function showBaseStats() {
     let infoHeadAbout = document.getElementById('infoHeadAbout');
     let infoHeadBaseStats = document.getElementById('infoHeadBaseStats');
-    let infoHeadEvolution = document.getElementById('infoHeadEvolution');
+    /*let infoHeadEvolution = document.getElementById('infoHeadEvolution');*/
 
 
     document.getElementById('infoAbout').classList.add('d-none');
     infoHeadAbout.classList.remove('info-head-select');
     document.getElementById('infoBaseStats').classList.remove('d-none');
     infoHeadBaseStats.classList.add('info-head-select');
-    document.getElementById('infoEvolution').classList.add('d-none');
-    infoHeadEvolution.classList.remove('info-head-select');
+    /*document.getElementById('infoEvolution').classList.add('d-none');
+    infoHeadEvolution.classList.remove('info-head-select');*/
 
     infoHeadAbout.style = '';
     infoHeadBaseStats.style = `border-color: ${getColorForClass(typclassSingle)}!important`;
-    infoHeadEvolution.style = '';
+    /*infoHeadEvolution.style = '';*/
 }
 
-function showEvolution() {
+/*function showEvolution() {
     let infoHeadAbout = document.getElementById('infoHeadAbout');
     let infoHeadBaseStats = document.getElementById('infoHeadBaseStats');
-    let infoHeadEvolution = document.getElementById('infoHeadEvolution');
+    /*let infoHeadEvolution = document.getElementById('infoHeadEvolution');
 
     document.getElementById('infoAbout').classList.add('d-none');
     infoHeadAbout.classList.remove('info-head-select');
     document.getElementById('infoBaseStats').classList.add('d-none');
     infoHeadBaseStats.classList.remove('info-head-select');
-    document.getElementById('infoEvolution').classList.remove('d-none');
+    /*document.getElementById('infoEvolution').classList.remove('d-none');
     infoHeadEvolution.classList.add('info-head-select');
 
     infoHeadAbout.style = '';
     infoHeadBaseStats.style = '';
     infoHeadEvolution.style = `border-color: ${getColorForClass(typclassSingle)}!important`;
-}
+}*/
 
+// load About Single View//
 function loadAboutPokemon() {
     loadAboutHeight();
     loadAboutWeight();
     loadAboutAbilities();
 }
 
+//load About height//
 function loadAboutHeight() {
     let height = currentPokemon['height'];
     let heightcm = height * 10 + ' cm';
 
     document.getElementById('aboutHeight').innerHTML = heightcm;
 }
-
+//load About weight//
 function loadAboutWeight() {
     let weight = currentPokemon['weight'];
     let weightkg = weight / 10 + ' kg';
@@ -308,6 +331,7 @@ function loadAboutWeight() {
     document.getElementById('aboutWeight').innerHTML = weightkg;
 }
 
+//load About Abilities//
 function loadAboutAbilities() {
     let abilities = currentPokemon['abilities'];
     let container = document.getElementById('aboutAbilities');
@@ -325,6 +349,7 @@ function loadAboutAbilities() {
     }
 }
 
+//load Base Stats//
 function loadBaseStats() {
     let stats = currentPokemon['stats']
     let sum = 0
@@ -340,11 +365,12 @@ function loadBaseStats() {
     renderBaseStatsTotal(sum);
 }
 
+// Change Progress Bar on Base Stats//
 function changeProgressBar(i, stat) {
     document.getElementById(`baseStatsPb${i}`).style.width = stat + '%';
     document.getElementById(`baseStatsPb${i}`).style.backgroundColor = colorProgressBar(stat);
 }
-
+// Change Color Progress Bar on Base Stats//
 function colorProgressBar(stat) {
     if (stat <= 33) {
         return 'red';
@@ -357,11 +383,12 @@ function colorProgressBar(stat) {
     }
 }
 
+// calculate Basestats Total//
 function renderBaseStatsTotal(sum) {
     document.getElementById('baseStatsTotal').innerHTML = sum;
     changeProgressBarTotal(sum);
 }
-
+// Change Progress Bar Total//
 function changeProgressBarTotal(sum) {
     let baseStatsPbTotal = document.getElementById(`baseStatsPbTotal`);
     let precent = 100 / 600 * sum;
@@ -370,6 +397,7 @@ function changeProgressBarTotal(sum) {
     baseStatsPbTotal.style.backgroundColor = colorProgressBarTotal(sum);
 }
 
+//Change Color Progress Bar Total//
 function colorProgressBarTotal(sum) {
     if (sum <= 200) {
         return 'red';
@@ -382,7 +410,7 @@ function colorProgressBarTotal(sum) {
     }
 }
 
-
+//Search Pokemon//
 async function searchPokemon() {
 
     let searchinput = document.getElementById('searchInput').value;
@@ -419,6 +447,7 @@ async function searchPokemon() {
 
 }
 
+//Change Singleview Color on hover(Nav-Bar)//
 function changeColorSingleViewhaeder() {
     let css = `.info-head p:hover{     border-color: ${getColorForClass(typclassSingle)}; }`;
     let style = document.createElement('style');
@@ -431,4 +460,6 @@ function changeColorSingleViewhaeder() {
 
     document.getElementById('infoHeadBaseStats').appendChild(style);
 }
+
+
 

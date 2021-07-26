@@ -13,7 +13,6 @@ body {
 }
 
 .pokedex-container {
-    
     width: 450px;
     border-radius: 24px;
     display: flex;
@@ -84,7 +83,6 @@ body {
     padding: 32px;
     color: white;
 }
-
 
 .info-container {
     border-radius: 24px;
@@ -166,13 +164,11 @@ body {
     justify-content: center;
     margin-top: 36px;
     position: relative;
-    
 }
 
 .singleimg img {
     max-height: 250px;
     max-width: 250px;
-
 }
 
 .info-head {
@@ -196,15 +192,14 @@ body {
 }
 
 .info-head p:hover {
-    
     color: rgb(0, 0, 0, 0.7);
 }
 
-.info-head-select{ 
-    color: rgb(0, 0, 0, 0.7)!important; 
+.info-head-select {
+    color: rgb(0, 0, 0, 0.7)!important;
 }
 
-.info-about{
+.info-about {
     margin-top: 24px;
     margin-bottom: 24px;
 }
@@ -214,7 +209,7 @@ body {
     color: #acacac;
 }
 
-.basestats-stats{
+.basestats-stats {
     margin-top: 24px;
     margin-bottom: 24px;
 }
@@ -228,7 +223,7 @@ table {
     color: #acacac;
 }
 
-.basestats-stats td{
+.basestats-stats td {
     width: 10%;
 }
 
@@ -237,7 +232,7 @@ table {
 }
 
 .progressbar {
-    max-width:  100%;
+    max-width: 100%;
     height: 4px;
     background-color: green;
     border-radius: 4px;
@@ -245,4 +240,17 @@ table {
 
 .d-none {
     display: none!important;
+}
+
+@media screen and (max-width: 1000px) {
+    #pokedexGeneralList {
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: nowrap;
+        justify-content: normal
+    }
+
+    .pokemonGeneral{
+        width: 80%;
+    }
 }
