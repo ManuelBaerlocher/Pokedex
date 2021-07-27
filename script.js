@@ -64,7 +64,7 @@ async function addGeneralPokemon() {
 }
 
 // scroll Function on General Side//
-function scrollload() {
+async function scrollload() {
     let container = document.getElementById('pokedexGeneralList')
 
     let scrollHeight = container.scrollHeight
@@ -79,7 +79,7 @@ function scrollload() {
         } else {
             lengthGeneral = 151;
         }
-        addGeneralPokemon();
+        await addGeneralPokemon();
     }
 }
 
@@ -431,7 +431,7 @@ async function searchPokemon() {
         for (let i = 0; i < pokemons.length; i++) {
             let name = pokemons[i];
 
-            if (name.toLowerCase().includes(searchinput)) {
+            if (name.toLowerCase().startsWith(searchinput)) {
 
                 nameshort = name.toLowerCase()
 
